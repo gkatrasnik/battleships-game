@@ -1,3 +1,3 @@
-import ships from "./scripts/ships";
+import shipFactory from "./scripts/shipFactory";
 
-ships();
+shipFactory();
