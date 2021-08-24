@@ -1,8 +1,20 @@
 const shipFactory = (shipData) => {
   const name = shipData.name;
   const length = shipData.length;
-
+  let direction = "horizontal";
   const lifes = new Array(length).fill(null);
+
+  const getDirection = () => {
+    return direction;
+  };
+
+  const changeDirection = () => {
+    if (direction === "horizontal") {
+      direction = "vertical";
+    } else if (direction === "vertical") {
+      direction = "horizontal";
+    }
+  };
 
   const hit = (slot) => {
     lifes[slot] = "hit";
@@ -16,6 +28,9 @@ const shipFactory = (shipData) => {
     name,
     length,
     lifes,
+    direction,
+    getDirection,
+    changeDirection,
     hit,
     isSunk,
   };

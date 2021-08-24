@@ -37,5 +37,14 @@ describe("ship factory make ships objects", () => {
       newShip.hit(3);
       expect(newShip.isSunk()).toBe(true);
     });
+
+    test("ship is horizontal on start", () => {
+      expect(newShip.getDirection()).toBe("horizontal");
+    });
+
+    test("ship is vertical after changing direction", () => {
+      newShip.changeDirection();
+      expect(newShip.getDirection()).toBe("vertical");
+    });
   });
 });
