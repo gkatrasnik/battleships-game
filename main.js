@@ -1,1 +1,1 @@
-console.log("penis");
+(()=>{"use strict";console.log("penis222")})();
