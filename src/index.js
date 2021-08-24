@@ -1,1 +1,3 @@
-console.log("penis");
+import ships from "./scripts/ships";
+
+ships();
