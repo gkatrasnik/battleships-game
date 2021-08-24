@@ -1,1 +1,1 @@
-(()=>{"use strict";console.log("penis222")})();
+(()=>{"use strict";const e=(e=>{const n=e.name,t=e.length,l=new Array(t).fill(null);return{name:n,length:t,lifes:l,hit:e=>{l[e]="hit"},isSunk:()=>l.every((e=>"hit"===e))}})({name:"four",length:4});console.log(e)})();
