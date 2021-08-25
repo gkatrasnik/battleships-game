@@ -15,4 +15,9 @@ describe("create gameboards for player1 and player2", () => {
   test("random field is null on start", () => {
     expect(grid[8][7]).toBe(null);
   });
+
+  test("place ship to gameboard with shipFactory", () => {
+    grid.placeShip(0, 0, "one");
+    expect(grid[0][0]).toBe("ship");
+  });
 });

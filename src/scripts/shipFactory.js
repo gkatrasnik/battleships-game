@@ -2,7 +2,7 @@ const shipFactory = (shipData) => {
   const name = shipData.name;
   const length = shipData.length;
   let direction = "horizontal";
-  const lifes = new Array(length).fill(null);
+  const lifes = new Array(length).fill("ship");
 
   const getDirection = () => {
     return direction;
