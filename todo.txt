@@ -1,0 +1,1 @@
+gameboardFactory, placeShip -> check if there is ship already -> throw error
