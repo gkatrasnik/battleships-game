@@ -5,6 +5,6 @@ import gameBoardFactory from "./scripts/gameBoardFactory";
 const newShip = { name: "four", length: 4 };
 
 const board = gameBoardFactory();
-board.placeShip(1, 1, newShip, "vertical"); //board is rotated 90 clockwise
+board.placeShip(20, 20, newShip, "vertical"); //board is rotated 90 clockwise
 
 console.log(board.getGrid());

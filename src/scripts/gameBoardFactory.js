@@ -20,10 +20,26 @@ const gameBoardFactory = () => {
       ship.changeDirection();
     }
     if (ship.getDirection() === "horizontal") {
+      // if ship doesnt fit the board, place it to the edge
+      if (x > 10 - ship.length) {
+        x = 10 - ship.length;
+      }
+      //if ship is placed outside the board, place it to the edge
+      if (y > 9) {
+        y = 9;
+      }
       for (let i = 0; i < ship.length; i++) {
         grid[x + i][y] = ship.lifes[i];
       }
     } else if (ship.getDirection() === "vertical") {
+      // if ship doesnt fit the board, place it to the edge
+      if (y > 10 - ship.length) {
+        y = 10 - ship.length;
+      }
+      //if ship is placed outside the board, place it to the edge
+      if (x > 9) {
+        x = 9;
+      }
       for (let i = 0; i < ship.length; i++) {
         grid[x][y + i] = ship.lifes[i];
       }
