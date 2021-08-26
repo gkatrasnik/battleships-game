@@ -13,6 +13,6 @@ const grid = board.getGrid();
 board.placeShip(5, 5, newShip, "horizontal", grid); //board is rotated 90 clockwise
 board.placeShip(9, 9, ship, "vertical", grid); //board is rotated 90 clockwise
 board.placeShip(0, 0, newShip2, "horizontal", grid); //board is rotated 90 clockwise
-board.placeShip(0, 1, newShip3, "vertical", grid); //board is rotated 90 clockwise
+board.placeShip(0, 0, newShip3, "vertical", grid); //board is rotated 90 clockwise
 
 console.log(board.getGrid());

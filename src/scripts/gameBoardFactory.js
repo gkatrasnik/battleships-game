@@ -49,7 +49,9 @@ const gameBoardFactory = () => {
         }
       }
     } else {
-      console.log(`cant place - ${ship.name} -  on this position`);
+      console.log(
+        `cant place - ${ship.name} -  on ${x},${y},${ship.getDirection()}`
+      );
     }
   };
 
