@@ -18,12 +18,12 @@ describe("ship factory make ships objects", () => {
     });
 
     test("all ship lifes are null", () => {
-      expect(newShip.lifes).toEqual(["ship", "ship", "ship", "ship"]);
+      expect(newShip.lifes).toEqual(["four", "four", "four", "four"]);
     });
 
     test("hit ship(2) turns index 2 to hit)", () => {
       newShip.hit(2);
-      expect(newShip.lifes).toEqual(["ship", "ship", "hit", "ship"]);
+      expect(newShip.lifes).toEqual(["four", "four", "hit", "four"]);
     });
 
     test("is not sunk on start", () => {
