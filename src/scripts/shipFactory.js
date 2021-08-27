@@ -16,8 +16,8 @@ const shipFactory = (shipData) => {
     }
   };
 
-  const hit = (slot) => {
-    lifes[slot] = "hit";
+  const hit = (index) => {
+    lifes[index] = "hit";
   };
 
   const isSunk = () => {

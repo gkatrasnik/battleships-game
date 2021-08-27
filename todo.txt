@@ -1,1 +1,2 @@
 gameboardFactory, placeShip -> check if there is ship already -> throw error DONE
+gameboardFactory, recieveAttack(x,y,grid) -> send ship.hit(index)

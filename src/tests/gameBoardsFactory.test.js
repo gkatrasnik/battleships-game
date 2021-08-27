@@ -42,8 +42,8 @@ describe("create gameboards for player1 and player2", () => {
     expect(gameboard.isPlaceEmpty(0, 0, newShip2, grid)).toBe(false);
   });
 
-  test("recieveAttack changes x,y field to X", () => {
+  test("recieveAttack changes x,y field to o", () => {
     gameboard.recieveAttack(5, 5, grid);
-    expect(grid[5][5]).toBe("x");
+    expect(grid[5][5]).toBe("o");
   });
 });

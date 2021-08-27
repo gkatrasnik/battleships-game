@@ -53,6 +53,8 @@ const gameBoardFactory = () => {
         `cant place - ${ship.name} -  on ${x},${y},${ship.getDirection()}`
       );
     }
+
+    return { ship };
   };
 
   //private func, check if there is ship already
@@ -89,12 +91,42 @@ const gameBoardFactory = () => {
     return true;
   };
 
+  //if there is ship, send hit(index) nd mark spot x, else just mark it x
   const recieveAttack = (x, y, grid) => {
     let board = grid;
-    board[x][y] = "x";
+    if (board[x][y] === null) {
+      board[x][y] = "o";
+    } else if (typeof board[x][y] === "object" && board[x][y] !== null) {
+      board[x][y].ship.hit(board[x][y].i);
+      //check if all ships are sunk/ still floating
+      allShipsSunk()
+        ? console.log("all ships are sunk")
+        : console.log("still floating");
+    }
   };
 
-  return { grid, getGrid, placeShip, isPlaceEmpty, recieveAttack };
+  //returns true if there is any ships still not sunk
+  const allShipsSunk = () => {
+    for (var i = 0; i < grid.length; i++) {
+      for (var j = 0; j < grid.length; j++) {
+        if (typeof grid[i][j] === "object" && grid[i][j] !== null) {
+          if (grid[i][j].ship.isSunk() === false) {
+            return false;
+          }
+        }
+      }
+    }
+    return true;
+  };
+
+  return {
+    grid,
+    getGrid,
+    placeShip,
+    isPlaceEmpty,
+    recieveAttack,
+    allShipsSunk,
+  };
 };
 
 export default gameBoardFactory;
