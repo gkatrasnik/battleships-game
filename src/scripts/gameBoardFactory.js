@@ -33,7 +33,7 @@ const gameBoardFactory = () => {
         }
         //place ship to x,y from args
         for (let i = 0; i < ship.length; i++) {
-          grid[x + i][y] = ship.lifes[i];
+          grid[x + i][y] = { ship, i };
         }
       } else if (ship.getDirection() === "vertical") {
         //if ship is placed outside the board, place it to the edge
@@ -45,7 +45,7 @@ const gameBoardFactory = () => {
         }
         //place ship to x,y from args
         for (let i = 0; i < ship.length; i++) {
-          grid[x][y + i] = ship.lifes[i];
+          grid[x][y + i] = { ship, i };
         }
       }
     } else {
@@ -89,7 +89,12 @@ const gameBoardFactory = () => {
     return true;
   };
 
-  return { grid, getGrid, placeShip, isPlaceEmpty };
+  const recieveAttack = (x, y, grid) => {
+    let board = grid;
+    board[x][y] = "x";
+  };
+
+  return { grid, getGrid, placeShip, isPlaceEmpty, recieveAttack };
 };
 
 export default gameBoardFactory;

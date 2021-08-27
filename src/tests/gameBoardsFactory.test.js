@@ -20,19 +20,19 @@ describe("create gameboards for player1 and player2", () => {
 
   test("place horizontal ship four to 0,0 ", () => {
     gameboard.placeShip(0, 0, shipData, "horizontal", grid);
-    expect(grid[0][0]).toBe("four");
-    expect(grid[1][0]).toBe("four");
-    expect(grid[2][0]).toBe("four");
-    expect(grid[3][0]).toBe("four");
+    expect(grid[0][0].ship.name).toBe("four");
+    expect(grid[1][0].ship.name).toBe("four");
+    expect(grid[2][0].ship.name).toBe("four");
+    expect(grid[3][0].ship.name).toBe("four");
   });
 
   test("horizontal ship four placed over the board is placed to the edges  ", () => {
     gameboard.placeShip(9, 9, shipData, "horizontal", grid);
     expect(grid[5][9]).toBe(null);
-    expect(grid[6][9]).toBe("four");
-    expect(grid[7][9]).toBe("four");
-    expect(grid[8][9]).toBe("four");
-    expect(grid[9][9]).toBe("four");
+    expect(grid[6][9].ship.name).toBe("four");
+    expect(grid[7][9].ship.name).toBe("four");
+    expect(grid[8][9].ship.name).toBe("four");
+    expect(grid[9][9].ship.name).toBe("four");
   });
 
   test("isPositionOk returns false if there is already a ship on position  ", () => {
@@ -40,5 +40,10 @@ describe("create gameboards for player1 and player2", () => {
 
     const newShip2 = shipFactory({ name: "four2", length: 4 });
     expect(gameboard.isPlaceEmpty(0, 0, newShip2, grid)).toBe(false);
+  });
+
+  test("recieveAttack changes x,y field to X", () => {
+    gameboard.recieveAttack(5, 5, grid);
+    expect(grid[5][5]).toBe("x");
   });
 });
