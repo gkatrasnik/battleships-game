@@ -1,27 +1,19 @@
-import shipsData from "./scripts/shipsData";
 import shipFactory from "./scripts/shipFactory";
 import gameBoardFactory from "./scripts/gameBoardFactory";
+import playerFactory from "./scripts/playerFactory";
 
-//ship data
-const ship = { name: "four1", length: 4 };
-const newShip = { name: "four", length: 4 };
-const newShip2 = { name: "three", length: 3 };
-const newShip3 = { name: "three1", length: 3 };
+const shipsData = { name: "four", length: 4 };
+const player1 = playerFactory("human");
+const comp = playerFactory("comp");
+const player1Board = gameBoardFactory();
+const compBoard = gameBoardFactory();
+const ship = shipFactory(shipsData);
 
-const board = gameBoardFactory();
-const grid = board.getGrid();
+compBoard.placeShip(0, 0, ship, "horizontal");
+player1.attack(0, 0, compBoard);
+player1.attack(1, 0, compBoard);
+player1.attack(2, 0, compBoard);
+player1.attack(3, 0, compBoard);
+player1.attack(9, 9, compBoard);
 
-board.placeShip(0, 0, newShip2, "horizontal", grid); //board is rotated 90 clockwise
-board.placeShip(0, 5, newShip, "horizontal", grid); //board is rotated 90 clockwise
-
-board.recieveAttack(0, 0, grid);
-board.recieveAttack(1, 0, grid);
-board.recieveAttack(2, 0, grid);
-board.recieveAttack(3, 0, grid);
-
-board.recieveAttack(0, 5, grid);
-board.recieveAttack(1, 5, grid);
-board.recieveAttack(2, 5, grid);
-board.recieveAttack(3, 5, grid);
-
-console.log(board.getGrid());
+console.log(compBoard.getGrid());

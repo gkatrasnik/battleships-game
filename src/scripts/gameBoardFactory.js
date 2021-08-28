@@ -1,6 +1,3 @@
-import shipFactory from "./shipFactory";
-import shipsData from "./shipsData";
-
 const gameBoardFactory = () => {
   //create 2d array
   let grid = Array(10)
@@ -13,16 +10,13 @@ const gameBoardFactory = () => {
 
   //console view is rotated 90 clockwise
   //direction is horizontal by default, add "vertical" arg to rotate
-  const placeShip = (x, y, shipData, direction, grid) => {
-    let ship = shipFactory(shipData);
-    let board = grid;
-
+  const placeShip = (x, y, ship, direction) => {
     //rotate ship to vertical if "verical" in args
     if (direction === "vertical") {
       ship.changeDirection();
     }
 
-    if (isPlaceEmpty(x, y, ship, board)) {
+    if (isPlaceEmpty(x, y, ship)) {
       if (ship.getDirection() === "horizontal") {
         //if ship is placed outside the board, place it to the edge
         if (x > 10 - ship.length) {
@@ -53,12 +47,10 @@ const gameBoardFactory = () => {
         `cant place - ${ship.name} -  on ${x},${y},${ship.getDirection()}`
       );
     }
-
-    return { ship };
   };
 
   //private func, check if there is ship already
-  const isPlaceEmpty = (x, y, ship, grid) => {
+  const isPlaceEmpty = (x, y, ship) => {
     if (ship.getDirection() === "horizontal") {
       // if ship doesnt fit the board, place it to the edge
       if (x > 10 - ship.length) {
@@ -92,12 +84,12 @@ const gameBoardFactory = () => {
   };
 
   //if there is ship, send hit(index) nd mark spot x, else just mark it x
-  const recieveAttack = (x, y, grid) => {
-    let board = grid;
-    if (board[x][y] === null) {
-      board[x][y] = "o";
-    } else if (typeof board[x][y] === "object" && board[x][y] !== null) {
-      board[x][y].ship.hit(board[x][y].i);
+  const recieveAttack = (x, y) => {
+    if (grid[x][y] === null) {
+      grid[x][y] = "o";
+    } else if (typeof grid[x][y] === "object" && grid[x][y] !== null) {
+      grid[x][y].ship.hit(grid[x][y].i);
+      grid[x][y] = "x";
       //check if all ships are sunk/ still floating
       allShipsSunk()
         ? console.log("all ships are sunk")

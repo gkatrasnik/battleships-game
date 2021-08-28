@@ -11,4 +11,4 @@ const shipsData = [
   { name: "one4", length: 1 },
 ];
 
-export default shipsData;
+export { shipsData };
