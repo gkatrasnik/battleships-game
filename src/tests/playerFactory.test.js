@@ -23,7 +23,7 @@ describe("both players can attack enemy board and have same ships", () => {
     expect(result).toBe(true);
   });
 
-  test("player can attack comp", () => {
+  test("player can attack board", () => {
     compBoard.placeShip(0, 0, ship, "horizontal");
     player1.attack(0, 0, compBoard);
     player1.attack(1, 0, compBoard);

@@ -25,22 +25,44 @@ const playerFactory = (type = "human") => {
     hasTurn = !hasTurn;
   };
 
+  const randomNumber = (min, max) => {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  };
+
   const attack = (x, y, enemyBoard) => {
     enemyBoard.recieveAttack(x, y);
   };
 
-  const randomNumber = (min, max) => {
-    return Math.random() * (max - min) + min;
-  };
-
   const autoAttack = (enemyBoard) => {
+    const grid = enemyBoard.getGrid();
     let x = randomNumber(0, 9);
     let y = randomNumber(0, 9);
 
-    enemyBoard.recieveAttack(x, y);
+    if (grid[x][y] === "x") {
+      console.log(`ship attacked already (${x},${y})`);
+      autoAttack(enemyBoard);
+    } else if (grid[x][y] === "o") {
+      console.log(`empty spot attacked already (${x},${y})`);
+      autoAttack(enemyBoard);
+    } else if (grid[x][y] === null) {
+      console.log(`miss (${x},${y})`);
+      enemyBoard.recieveAttack(x, y);
+    } else {
+      console.log(`hit (${x},${y})`);
+      enemyBoard.recieveAttack(x, y);
+    }
   };
 
-  return { getShips, getType, attack, changeHasTurn, createShipsArray };
+  return {
+    getShips,
+    getType,
+    attack,
+    autoAttack,
+    changeHasTurn,
+    createShipsArray,
+  };
 };
 
 export default playerFactory;
