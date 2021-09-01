@@ -1,6 +1,8 @@
 import shipFactory from "./scripts/shipFactory";
+import dom from "./scripts/dom";
 import gameBoardFactory from "./scripts/gameBoardFactory";
 import playerFactory from "./scripts/playerFactory";
+import "./styles/styles.css";
 
 const shipsData = { name: "four", length: 4 };
 const player1 = playerFactory("human");
@@ -19,15 +21,9 @@ player1Board.placeShip(3, 3, ship, "horizontal");
 player1.attack(1, 0, compBoard);
 player1.attack(2, 0, compBoard);
 player1.attack(3, 0, compBoard);*/
-comp.autoAttack(player1Board);
-comp.autoAttack(player1Board);
-comp.autoAttack(player1Board);
-comp.autoAttack(player1Board);
-comp.autoAttack(player1Board);
-comp.autoAttack(player1Board);
-comp.autoAttack(player1Board);
-comp.autoAttack(player1Board);
-comp.autoAttack(player1Board);
-comp.autoAttack(player1Board);
+
+for (let i = 0; i < 99; i++) {
+  comp.autoAttack(player1Board);
+}
 
 console.log(player1Board.getGrid());

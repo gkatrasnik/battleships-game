@@ -1,8 +1,10 @@
 import { shipsData } from "./shipsData";
 import shipFactory from "./shipFactory";
+import { randomNumber } from "./helpers";
 
 const playerFactory = (type = "human") => {
   let ships = createShipsArray(shipsData);
+  let attackedPositions = [];
 
   //create array of ship obejcts with ship factory
   function createShipsArray(data) {
@@ -21,14 +23,8 @@ const playerFactory = (type = "human") => {
     return type;
   };
 
-  const changeHasTurn = () => {
-    hasTurn = !hasTurn;
-  };
-
-  const randomNumber = (min, max) => {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+  const getAttackedPositions = () => {
+    return attackedPositions;
   };
 
   const attack = (x, y, enemyBoard) => {
@@ -36,22 +32,18 @@ const playerFactory = (type = "human") => {
   };
 
   const autoAttack = (enemyBoard) => {
-    const grid = enemyBoard.getGrid();
     let x = randomNumber(0, 9);
     let y = randomNumber(0, 9);
+    let coordinates = [x, y];
 
-    if (grid[x][y] === "x") {
-      console.log(`ship attacked already (${x},${y})`);
+    //if coordinates were already attacked, run autoattack again
+    if (
+      JSON.stringify(attackedPositions).includes(JSON.stringify(coordinates))
+    ) {
       autoAttack(enemyBoard);
-    } else if (grid[x][y] === "o") {
-      console.log(`empty spot attacked already (${x},${y})`);
-      autoAttack(enemyBoard);
-    } else if (grid[x][y] === null) {
-      console.log(`miss (${x},${y})`);
-      enemyBoard.recieveAttack(x, y);
     } else {
-      console.log(`hit (${x},${y})`);
       enemyBoard.recieveAttack(x, y);
+      attackedPositions.push(coordinates);
     }
   };
 
@@ -60,7 +52,6 @@ const playerFactory = (type = "human") => {
     getType,
     attack,
     autoAttack,
-    changeHasTurn,
     createShipsArray,
   };
 };

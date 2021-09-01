@@ -83,7 +83,7 @@ const gameBoardFactory = () => {
     return true;
   };
 
-  //if there is ship, send hit(index) nd mark spot x, else just mark it x
+  //if there is ship, send hit(index) and mark spot x, else just mark it o
   const recieveAttack = (x, y) => {
     if (grid[x][y] === null) {
       grid[x][y] = "o";
@@ -97,7 +97,7 @@ const gameBoardFactory = () => {
     }
   };
 
-  //returns true if there is any ships still not sunk
+  //returns false if there are any ships still not sunk
   const allShipsSunk = () => {
     for (var i = 0; i < grid.length; i++) {
       for (var j = 0; j < grid.length; j++) {
