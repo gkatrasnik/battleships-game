@@ -22,18 +22,18 @@ describe("create gameboards for player1 and player2", () => {
     const ship = shipFactory(shipData);
     gameboard.placeShip(0, 0, ship, "horizontal", grid);
     expect(grid[0][0].ship.name).toBe("four");
-    expect(grid[1][0].ship.name).toBe("four");
-    expect(grid[2][0].ship.name).toBe("four");
-    expect(grid[3][0].ship.name).toBe("four");
+    expect(grid[0][1].ship.name).toBe("four");
+    expect(grid[0][2].ship.name).toBe("four");
+    expect(grid[0][3].ship.name).toBe("four");
   });
 
   test("horizontal ship four placed over the board is placed to the edges  ", () => {
     const ship = shipFactory(shipData);
-    gameboard.placeShip(9, 9, ship, "horizontal", grid);
-    expect(grid[5][9]).toBe(null);
-    expect(grid[6][9].ship.name).toBe("four");
-    expect(grid[7][9].ship.name).toBe("four");
-    expect(grid[8][9].ship.name).toBe("four");
+    gameboard.placeShip(9, 9, ship, "horizontal");
+    expect(grid[9][5]).toBe(null);
+    expect(grid[9][6].ship.name).toBe("four");
+    expect(grid[9][7].ship.name).toBe("four");
+    expect(grid[9][8].ship.name).toBe("four");
     expect(grid[9][9].ship.name).toBe("four");
   });
 

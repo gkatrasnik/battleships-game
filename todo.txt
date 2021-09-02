@@ -1,3 +1,4 @@
 gameboardFactory, placeShip -> check if there is ship already -> throw error DONE
 gameboardFactory, recieveAttack(x,y,grid) -> send ship.hit(index) DONE
 player, autoAttack store attacke coordinates to array, and when attacking check array if it already contains coordinates
+autoplace change direction doesnt work

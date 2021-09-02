@@ -7,10 +7,11 @@
 #gameboards-container {
   display: flex;
   justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
 }
 
-#player-gameboard {
+#player1-gameboard {
   width: 400px;
   height: 400px;
   border: 3px solid blue;
@@ -27,5 +28,7 @@
   height: 9%;
   background-color: lightblue;
   display: inline-block;
+  vertical-align: middle;
+
   margin: 2px;
 }

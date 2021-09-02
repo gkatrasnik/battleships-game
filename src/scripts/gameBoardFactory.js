@@ -1,3 +1,6 @@
+import { randomNumber } from "./helpers";
+import gameplay from "./gameplay";
+
 const gameBoardFactory = () => {
   //create 2d array
   let grid = Array(10)
@@ -6,6 +9,28 @@ const gameBoardFactory = () => {
 
   const getGrid = () => {
     return grid;
+  };
+
+  const autoPlaceShip = (ship) => {
+    const x = randomNumber(0, 9);
+    const y = randomNumber(0, 9);
+    const direction = Math.round(Math.random());
+
+    if (direction > 0.5) {
+      ship.changeDirection();
+    }
+
+    const place = placeShip(x, y, ship, ship.getDirection());
+    console.log(ship.getDirection());
+    if (!place) {
+      autoPlaceShip(ship);
+    }
+  };
+
+  const autoPlaceAllShips = (arrayOfShips) => {
+    for (let i = 0; i < arrayOfShips.length; i++) {
+      autoPlaceShip(arrayOfShips[i]);
+    }
   };
 
   //console view is rotated 90 clockwise
@@ -19,18 +44,6 @@ const gameBoardFactory = () => {
     if (isPlaceEmpty(x, y, ship)) {
       if (ship.getDirection() === "horizontal") {
         //if ship is placed outside the board, place it to the edge
-        if (x > 10 - ship.length) {
-          x = 10 - ship.length;
-        }
-        if (y > 9) {
-          y = 9;
-        }
-        //place ship to x,y from args
-        for (let i = 0; i < ship.length; i++) {
-          grid[x + i][y] = { ship, i };
-        }
-      } else if (ship.getDirection() === "vertical") {
-        //if ship is placed outside the board, place it to the edge
         if (y > 10 - ship.length) {
           y = 10 - ship.length;
         }
@@ -41,11 +54,25 @@ const gameBoardFactory = () => {
         for (let i = 0; i < ship.length; i++) {
           grid[x][y + i] = { ship, i };
         }
+      } else if (ship.getDirection() === "vertical") {
+        //if ship is placed outside the board, place it to the edge
+        if (x > 10 - ship.length) {
+          x = 10 - ship.length;
+        }
+        if (y > 9) {
+          y = 9;
+        }
+        //place ship to x,y from args
+        for (let i = 0; i < ship.length; i++) {
+          grid[x + i][y] = { ship, i };
+        }
       }
+      return true;
     } else {
       console.log(
         `cant place - ${ship.name} -  on ${x},${y},${ship.getDirection()}`
       );
+      return false;
     }
   };
 
@@ -85,15 +112,18 @@ const gameBoardFactory = () => {
 
   //if there is ship, send hit(index) and mark spot x, else just mark it o
   const recieveAttack = (x, y) => {
-    if (grid[x][y] === null) {
-      grid[x][y] = "o";
-    } else if (typeof grid[x][y] === "object" && grid[x][y] !== null) {
-      grid[x][y].ship.hit(grid[x][y].i);
-      grid[x][y] = "x";
+    if (grid[y][x] === null) {
+      grid[y][x] = "o";
+    } else if (typeof grid[y][x] === "object" && grid[y][x] !== null) {
+      grid[y][x].ship.hit(grid[y][x].i);
+      grid[y][x] = "x";
       //check if all ships are sunk/ still floating
-      allShipsSunk()
-        ? console.log("all ships are sunk")
-        : console.log("still floating");
+      if (allShipsSunk()) {
+        console.log("all ships are sunk");
+        gameplay().changeGameOver();
+      } else {
+        console.log("still floating");
+      }
     }
   };
 
@@ -112,12 +142,13 @@ const gameBoardFactory = () => {
   };
 
   return {
-    grid,
     getGrid,
     placeShip,
     isPlaceEmpty,
     recieveAttack,
     allShipsSunk,
+    autoPlaceShip,
+    autoPlaceAllShips,
   };
 };
 

@@ -19,16 +19,21 @@ const playerFactory = (type) => {
     return ships;
   };
 
-  const getType = () => {
-    return type;
-  };
-
   const getAttackedPositions = () => {
     return attackedPositions;
   };
 
   const attack = (x, y, enemyBoard) => {
-    enemyBoard.recieveAttack(x, y);
+    let coordinates = [x, y];
+
+    if (
+      JSON.stringify(attackedPositions).includes(JSON.stringify(coordinates))
+    ) {
+      alert("You already attacked these coordinates");
+    } else {
+      enemyBoard.recieveAttack(x, y);
+      attackedPositions.push(coordinates);
+    }
   };
 
   const autoAttack = (enemyBoard) => {
@@ -49,7 +54,6 @@ const playerFactory = (type) => {
 
   return {
     getShips,
-    getType,
     attack,
     autoAttack,
     createShipsArray,
