@@ -1,29 +1,17 @@
-import shipFactory from "./scripts/shipFactory";
+import gameplay from "./scripts/gameplay";
 import dom from "./scripts/dom";
-import gameBoardFactory from "./scripts/gameBoardFactory";
-import playerFactory from "./scripts/playerFactory";
 import "./styles/styles.css";
 
-const shipsData = { name: "four", length: 4 };
-const player1 = playerFactory("human");
-const comp = playerFactory("comp");
-const player1Board = gameBoardFactory();
-const compBoard = gameBoardFactory();
-const ship = shipFactory(shipsData);
-const ship2 = shipFactory(shipsData);
+const gameboardsContainer = document.getElementById("gameboards-container");
+const player1Gameboard = document.getElementById("player-gameboard");
+const compGameboard = document.getElementById("comp-gameboard");
+const scoreBoard = document.getElementById("scoreboard");
 
-compBoard.placeShip(0, 0, ship, "horizontal");
-player1Board.placeShip(0, 0, ship, "horizontal");
-player1Board.placeShip(3, 3, ship, "horizontal");
-//player1Board.placeShip(3, 3, ship2, "horizontal");
+const game = gameplay();
+const player1 = game.getPlayer1();
+const comp = game.getComp();
+const player1Board = game.getPlayer1Board();
+const compBoard = game.getCompBoard();
 
-/*player1.attack(0, 0, compBoard);
-player1.attack(1, 0, compBoard);
-player1.attack(2, 0, compBoard);
-player1.attack(3, 0, compBoard);*/
-
-for (let i = 0; i < 99; i++) {
-  comp.autoAttack(player1Board);
-}
-
-console.log(player1Board.getGrid());
+dom.renderGameBoard(player1Board, player1Gameboard);
+dom.renderGameBoard(compBoard, compGameboard);

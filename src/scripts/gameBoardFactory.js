@@ -99,8 +99,8 @@ const gameBoardFactory = () => {
 
   //returns false if there are any ships still not sunk
   const allShipsSunk = () => {
-    for (var i = 0; i < grid.length; i++) {
-      for (var j = 0; j < grid.length; j++) {
+    for (let i = 0; i < grid.length; i++) {
+      for (let j = 0; j < grid.length; j++) {
         if (typeof grid[i][j] === "object" && grid[i][j] !== null) {
           if (grid[i][j].ship.isSunk() === false) {
             return false;

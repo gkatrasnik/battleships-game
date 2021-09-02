@@ -2,7 +2,7 @@ import { shipsData } from "./shipsData";
 import shipFactory from "./shipFactory";
 import { randomNumber } from "./helpers";
 
-const playerFactory = (type = "human") => {
+const playerFactory = (type) => {
   let ships = createShipsArray(shipsData);
   let attackedPositions = [];
 
