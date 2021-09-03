@@ -9,6 +9,9 @@ const gameplay = () => {
   const compGameboard = document.getElementById("comp-gameboard");
   const scoreBoard = document.getElementById("scoreboard");
   const playAgainButton = document.getElementById("play-again-button");
+  const playAgainButtonDiv = document.getElementById("play-again-button-div");
+  const winnerText = document.getElementById("winner");
+  const winnerDiv = document.getElementById("winner-div");
 
   // define players, gameboards
   const player1 = playerFactory("human");
@@ -39,18 +42,20 @@ const gameplay = () => {
     comp.autoAttack(player1Board);
 
     dom.renderGameBoard(player1Board, player1Gameboard);
-    dom.renderGameBoard(compBoard, compGameboard); //neds to be true
+    dom.renderGameBoard(compBoard, compGameboard, true); //neds to be true
 
     if (compBoard.allShipsSunk()) {
       removeBoardEventListeners();
       winner = player1;
-      console.log(`game over, Player wins!`);
+      winnerText.textContent = "Player wins!";
+      winnerDiv.style.display = "flex";
       scorePlayer++;
       renderScore();
     } else if (player1Board.allShipsSunk()) {
       removeBoardEventListeners();
       winner = comp;
-      console.log(`game over, computer wins!`);
+      winnerText.textContent = "Player wins!";
+      winnerDiv.style.display = "flex";
       compScore++;
       renderScore();
     }
@@ -60,7 +65,7 @@ const gameplay = () => {
     compBoard.autoPlaceAllShips(comp.getShips());
     player1Board.autoPlaceAllShips(player1.getShips());
     dom.renderGameBoard(player1Board, player1Gameboard);
-    dom.renderGameBoard(compBoard, compGameboard); //neds to be true to be hidden
+    dom.renderGameBoard(compBoard, compGameboard, true); //neds to be true to be hidden
     renderScore();
   };
 
@@ -71,6 +76,7 @@ const gameplay = () => {
     compBoard.resetBoard();
     startGame();
     addBoardEventListeners();
+    winnerDiv.style.display = "none";
   };
 
   const addBoardEventListeners = () => {
@@ -103,6 +109,7 @@ const gameplay = () => {
   //set event listeners
   addBoardEventListeners();
   playAgainButton.addEventListener("click", playAgain);
+  playAgainButtonDiv.addEventListener("click", playAgain);
 
   return {
     addBoardEventListeners,
