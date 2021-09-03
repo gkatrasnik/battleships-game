@@ -20,8 +20,9 @@ const playerFactory = (type) => {
   };
 
   const resetShips = () => {
-    ships = createShipsArray(shipsData)
-  }
+    ships = createShipsArray(shipsData);
+    attackedPositions = [];
+  };
 
   const attack = (x, y, enemyBoard) => {
     let coordinates = [x, y];

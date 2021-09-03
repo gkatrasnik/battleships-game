@@ -1,6 +1,4 @@
 import { randomNumber } from "./helpers";
-import gameplay from "./gameplay";
-
 const gameBoardFactory = () => {
   //create 2d array
   let grid = Array(10)
@@ -15,13 +13,13 @@ const gameBoardFactory = () => {
     const x = randomNumber(0, 9);
     const y = randomNumber(0, 9);
     const direction = Math.round(Math.random());
+    //change direction doesnt work here
 
     if (direction > 0.5) {
       ship.changeDirection();
     }
 
     const place = placeShip(x, y, ship, ship.getDirection());
-    console.log(ship.getDirection());
     if (!place) {
       autoPlaceShip(ship);
     }
@@ -37,12 +35,9 @@ const gameBoardFactory = () => {
   //direction is horizontal by default, add "vertical" arg to rotate
   const placeShip = (x, y, ship, direction) => {
     //rotate ship to vertical if "verical" in args
-    if (direction === "vertical") {
-      ship.changeDirection();
-    }
 
-    if (isPlaceEmpty(x, y, ship)) {
-      if (ship.getDirection() === "horizontal") {
+    if (isPlaceEmpty(x, y, ship, direction)) {
+      if (direction === "horizontal") {
         //if ship is placed outside the board, place it to the edge
         if (y > 10 - ship.length) {
           y = 10 - ship.length;
@@ -54,7 +49,7 @@ const gameBoardFactory = () => {
         for (let i = 0; i < ship.length; i++) {
           grid[x][y + i] = { ship, i, status: null };
         }
-      } else if (ship.getDirection() === "vertical") {
+      } else if (direction === "vertical") {
         //if ship is placed outside the board, place it to the edge
         if (x > 10 - ship.length) {
           x = 10 - ship.length;
@@ -69,16 +64,13 @@ const gameBoardFactory = () => {
       }
       return true;
     } else {
-      console.log(
-        `cant place - ${ship.name} -  on ${x},${y},${ship.getDirection()}`
-      );
       return false;
     }
   };
 
   //private func, check if there is ship already
-  const isPlaceEmpty = (x, y, ship) => {
-    if (ship.getDirection() === "horizontal") {
+  const isPlaceEmpty = (x, y, ship, direction) => {
+    if (direction === "horizontal") {
       // if ship doesnt fit the board, place it to the edge
       if (x > 10 - ship.length) {
         x = 10 - ship.length;
@@ -92,7 +84,7 @@ const gameBoardFactory = () => {
           return false;
         }
       }
-    } else if (ship.getDirection() === "vertical") {
+    } else if (direction === "vertical") {
       // if ship doesnt fit the board, place it to the edge
       if (y > 10 - ship.length) {
         y = 10 - ship.length;
@@ -116,8 +108,7 @@ const gameBoardFactory = () => {
       grid[y][x] = "miss";
     } else if (typeof grid[y][x] === "object" && grid[y][x] !== null) {
       grid[y][x].ship.hit(grid[y][x].i);
-      grid[y][x].status = "hit"; //_________________________________________________________________
-      //check if all ships are sunk/ still floating
+      grid[y][x].status = "hit";
     }
   };
 
@@ -135,8 +126,15 @@ const gameBoardFactory = () => {
     return true;
   };
 
+  const resetBoard = () => {
+    grid = Array(10)
+      .fill(null)
+      .map(() => Array(10).fill(null));
+  };
+
   return {
     getGrid,
+    resetBoard,
     placeShip,
     isPlaceEmpty,
     recieveAttack,

@@ -18,6 +18,12 @@ const gameplay = () => {
 
   let gameOver = false;
   let winner = null;
+  let scorePlayer = 0;
+  let scoreComp = 0;
+
+  const renderScore = () => {
+    scoreBoard.textContent = `${scorePlayer} : ${scoreComp}`;
+  };
 
   const changeGameOver = () => {
     gameOver = !gameOver;
@@ -33,17 +39,20 @@ const gameplay = () => {
     comp.autoAttack(player1Board);
 
     dom.renderGameBoard(player1Board, player1Gameboard);
-    dom.renderGameBoard(compBoard, compGameboard, true);
-    console.log(compBoard.getGrid()); //______________________________________________________________
+    dom.renderGameBoard(compBoard, compGameboard); //neds to be true
 
     if (compBoard.allShipsSunk()) {
       removeBoardEventListeners();
       winner = player1;
       console.log(`game over, Player wins!`);
+      scorePlayer++;
+      renderScore();
     } else if (player1Board.allShipsSunk()) {
       removeBoardEventListeners();
       winner = comp;
       console.log(`game over, computer wins!`);
+      compScore++;
+      renderScore();
     }
   };
 
@@ -51,7 +60,8 @@ const gameplay = () => {
     compBoard.autoPlaceAllShips(comp.getShips());
     player1Board.autoPlaceAllShips(player1.getShips());
     dom.renderGameBoard(player1Board, player1Gameboard);
-    dom.renderGameBoard(compBoard, compGameboard, true);
+    dom.renderGameBoard(compBoard, compGameboard); //neds to be true to be hidden
+    renderScore();
   };
 
   const playAgain = () => {
@@ -60,6 +70,7 @@ const gameplay = () => {
     player1Board.resetBoard();
     compBoard.resetBoard();
     startGame();
+    addBoardEventListeners();
   };
 
   const addBoardEventListeners = () => {

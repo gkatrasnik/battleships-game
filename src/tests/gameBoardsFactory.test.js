@@ -40,14 +40,14 @@ describe("create gameboards for player1 and player2", () => {
   test("isPositionOk returns false if there is already a ship on position  ", () => {
     const ship = shipFactory(shipData);
 
-    gameboard.placeShip(0, 0, ship, "horizontal", grid);
+    gameboard.placeShip(0, 0, ship, "horizontal");
 
     const newShip2 = shipFactory({ name: "four2", length: 4 });
-    expect(gameboard.isPlaceEmpty(0, 0, newShip2, grid)).toBe(false);
+    expect(gameboard.isPlaceEmpty(0, 0, newShip2, "horizontal")).toBe(false);
   });
 
   test("recieveAttack changes x,y field to o", () => {
     gameboard.recieveAttack(5, 5, grid);
-    expect(grid[5][5]).toBe("o");
+    expect(grid[5][5]).toBe("miss");
   });
 });

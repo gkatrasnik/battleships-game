@@ -12,10 +12,6 @@ describe("both players can attack enemy board and have same ships", () => {
   const compBoard = gameBoardFactory();
   const ship = shipFactory(shipData);
 
-  test("player type is human", () => {
-    expect(player1.getType()).toBe("human");
-  });
-
   test("both players has same ships", () => {
     const array1 = player1.getShips();
     const array2 = comp.getShips();
@@ -30,11 +26,11 @@ describe("both players can attack enemy board and have same ships", () => {
     player1.attack(2, 0, compBoard);
     player1.attack(3, 0, compBoard);
     player1.attack(9, 9, compBoard);
-    expect(compBoard.getGrid()[0][0]).toBe("x");
-    expect(compBoard.getGrid()[0][1]).toBe("x");
-    expect(compBoard.getGrid()[0][2]).toBe("x");
-    expect(compBoard.getGrid()[0][3]).toBe("x");
+    expect(typeof compBoard.getGrid()[0][0]).toBe("object");
+    expect(typeof compBoard.getGrid()[0][1]).toBe("object");
+    expect(typeof compBoard.getGrid()[0][2]).toBe("object");
+    expect(typeof compBoard.getGrid()[0][3]).toBe("object");
     expect(compBoard.getGrid()[0][4]).toBe(null);
-    expect(compBoard.getGrid()[9][9]).toBe("o");
+    expect(compBoard.getGrid()[9][9]).toBe("miss");
   });
 });
