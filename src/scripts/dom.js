@@ -1,28 +1,27 @@
 const dom = (() => {
-  const renderCell = (x, y, grid, value, hidden) => {
+  const renderCell = (x, y, value, hidden) => {
     let cell = document.createElement("div");
-    
-    
-    //if rendering hidden gameboard(enemy), ships are not shown    
-    if (typeof grid[y][x] === "object" && grid[y][x] !== null){
-      if (hidden){
-        cell.classList.add("default");
-      }else {
-        cell.classList.add("ship");
-      }
-      
-    }    
-    else if (value === "x") {
-    cell.classList.add("hit");
-      
 
-    } else if (value === "o") {
+    if (value === null) {
+      cell.classList.add("default");
+    } else if (value === "miss") {
       cell.classList.add("miss");
     } else {
-      cell.classList.add("default");
+      //if rendering hidden gameboard(enemy), ships are not shown
+      if (hidden) {
+        cell.classList.add("default");
+      } else {
+        cell.classList.add("ship");
+      }
+      if (value.status === "hit") {
+        cell.classList.add("hit");
+      }
+      if (value.ship.isSunk()) {
+        cell.classList.add("sunk");
+      }
     }
 
-    cell.classList.add("grid-cell")
+    cell.classList.add("grid-cell");
     cell.dataset.x = x;
     cell.dataset.y = y;
 
@@ -33,10 +32,10 @@ const dom = (() => {
     parentElement.innerHTML = "";
     const board = gameboard.getGrid();
     const gridRender = [];
-    
+
     for (let i = 0; i < board.length; i++) {
       for (let j = 0; j < board.length; j++) {
-        let cell = renderCell(j, i,  board, board[i][j], hidden);
+        let cell = renderCell(j, i, board[i][j], hidden);
         gridRender.push(cell);
       }
     }

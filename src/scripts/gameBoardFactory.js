@@ -11,12 +11,6 @@ const gameBoardFactory = () => {
     return grid;
   };
 
-  const resetBoard = () => {
-    grid = Array(10)
-    .fill(null)
-    .map(() => Array(10).fill(null));
-  }
-
   const autoPlaceShip = (ship) => {
     const x = randomNumber(0, 9);
     const y = randomNumber(0, 9);
@@ -58,7 +52,7 @@ const gameBoardFactory = () => {
         }
         //place ship to x,y from args
         for (let i = 0; i < ship.length; i++) {
-          grid[x][y + i] = { ship, i };
+          grid[x][y + i] = { ship, i, status: null };
         }
       } else if (ship.getDirection() === "vertical") {
         //if ship is placed outside the board, place it to the edge
@@ -70,7 +64,7 @@ const gameBoardFactory = () => {
         }
         //place ship to x,y from args
         for (let i = 0; i < ship.length; i++) {
-          grid[x + i][y] = { ship, i };
+          grid[x + i][y] = { ship, i, status: null };
         }
       }
       return true;
@@ -119,17 +113,11 @@ const gameBoardFactory = () => {
   //if there is ship, send hit(index) and mark spot x, else just mark it o
   const recieveAttack = (x, y) => {
     if (grid[y][x] === null) {
-      grid[y][x] = "o";
+      grid[y][x] = "miss";
     } else if (typeof grid[y][x] === "object" && grid[y][x] !== null) {
       grid[y][x].ship.hit(grid[y][x].i);
-      grid[y][x] = "x";
+      grid[y][x].status = "hit"; //_________________________________________________________________
       //check if all ships are sunk/ still floating
-      if (allShipsSunk()) {
-        console.log("all ships are sunk");
-        gameplay().changeGameOver();
-      } else {
-        console.log("still floating");
-      }
     }
   };
 
@@ -149,7 +137,6 @@ const gameBoardFactory = () => {
 
   return {
     getGrid,
-    resetBoard,
     placeShip,
     isPlaceEmpty,
     recieveAttack,

@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
 
 #root {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 #gameboards-container {
@@ -27,8 +27,6 @@
   border: 3px solid blue;
 }
 
-
-
 #comp-gameboard {
   width: 400px;
   height: 400px;
@@ -50,7 +48,7 @@
 .grid-cell {
   width: 9%;
   height: 9%;
-  
+
   display: inline-block;
   vertical-align: middle;
 
@@ -58,7 +56,7 @@
 }
 
 .ship {
- background-color: steelblue;
+  background-color: steelblue;
 }
 
 .default {
@@ -66,13 +64,13 @@
 }
 
 .hit {
- background-color: red;
+  background-color: lightcoral;
 }
 
 .sunk {
-  border: solid 1px darkred;
+  background-color: red;
 }
 
 .miss {
-background-color: grey;
+  background-color: grey;
 }

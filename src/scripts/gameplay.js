@@ -8,7 +8,7 @@ const gameplay = () => {
   const player1Gameboard = document.getElementById("player1-gameboard");
   const compGameboard = document.getElementById("comp-gameboard");
   const scoreBoard = document.getElementById("scoreboard");
-  const playAgainButton = document.getElementById("play-again-button")
+  const playAgainButton = document.getElementById("play-again-button");
 
   // define players, gameboards
   const player1 = playerFactory("human");
@@ -23,7 +23,6 @@ const gameplay = () => {
     gameOver = !gameOver;
   };
 
-
   //main game loop
   const AttackLoop = (event) => {
     const cell = event.target;
@@ -35,15 +34,16 @@ const gameplay = () => {
 
     dom.renderGameBoard(player1Board, player1Gameboard);
     dom.renderGameBoard(compBoard, compGameboard, true);
+    console.log(compBoard.getGrid()); //______________________________________________________________
 
     if (compBoard.allShipsSunk()) {
       removeBoardEventListeners();
-      winner = player1
+      winner = player1;
       console.log(`game over, Player wins!`);
-    } else if (player1Board.allShipsSunk()){       
-        removeBoardEventListeners();
-        winner = comp
-        console.log(`game over, computer wins!`);
+    } else if (player1Board.allShipsSunk()) {
+      removeBoardEventListeners();
+      winner = comp;
+      console.log(`game over, computer wins!`);
     }
   };
 
@@ -51,17 +51,16 @@ const gameplay = () => {
     compBoard.autoPlaceAllShips(comp.getShips());
     player1Board.autoPlaceAllShips(player1.getShips());
     dom.renderGameBoard(player1Board, player1Gameboard);
-    dom.renderGameBoard(compBoard, compGameboard,true);
+    dom.renderGameBoard(compBoard, compGameboard, true);
   };
 
   const playAgain = () => {
-    player1.resetShips()
-    comp.resetShips()
-    player1Board.resetBoard()
-    compBoard.resetBoard()
-    startGame()
-    
-  }
+    player1.resetShips();
+    comp.resetShips();
+    player1Board.resetBoard();
+    compBoard.resetBoard();
+    startGame();
+  };
 
   const addBoardEventListeners = () => {
     compGameboard.addEventListener("click", AttackLoop);
@@ -69,7 +68,6 @@ const gameplay = () => {
 
   const removeBoardEventListeners = () => {
     compGameboard.removeEventListener("click", AttackLoop);
-    
   };
 
   //getters
@@ -93,7 +91,7 @@ const gameplay = () => {
 
   //set event listeners
   addBoardEventListeners();
-  playAgainButton.addEventListener("click", playAgain)
+  playAgainButton.addEventListener("click", playAgain);
 
   return {
     addBoardEventListeners,
