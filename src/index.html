@@ -7,14 +7,20 @@
   <body>
     <div id="root">
       <h1 id="title">Battleships</h1>
-      <div id="scoreboard">0-0</div>
+      <div id="scoreboard"><h3>Score - Score</h3></div>
       <div id="controls">
-        <button id="start-button">Start</button>
-        <button id="play-again-button">Play again</button>
+        <button id="start-button" class="control-button">Start</button>
+        <button id="play-again-button" class="control-button">Play again</button>
       </div>
       <div id="gameboards-container">
-        <div id="player1-gameboard"></div>
-        <div id="comp-gameboard"></div>
+        <div class="gameboard-container">
+          <h3>Player 1</h3>
+          <div id="player1-gameboard"></div>
+        </div>
+        <div class="gameboard-container">
+          <h3>Computer</h3>
+          <div id="comp-gameboard"></div>
+        </div>
       </div>
     </div>
   </body>

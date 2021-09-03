@@ -19,9 +19,9 @@ const playerFactory = (type) => {
     return ships;
   };
 
-  const getAttackedPositions = () => {
-    return attackedPositions;
-  };
+  const resetShips = () => {
+    ships = createShipsArray(shipsData)
+  }
 
   const attack = (x, y, enemyBoard) => {
     let coordinates = [x, y];
@@ -54,6 +54,7 @@ const playerFactory = (type) => {
 
   return {
     getShips,
+    resetShips,
     attack,
     autoAttack,
     createShipsArray,

@@ -8,6 +8,7 @@ const gameplay = () => {
   const player1Gameboard = document.getElementById("player1-gameboard");
   const compGameboard = document.getElementById("comp-gameboard");
   const scoreBoard = document.getElementById("scoreboard");
+  const playAgainButton = document.getElementById("play-again-button")
 
   // define players, gameboards
   const player1 = playerFactory("human");
@@ -16,11 +17,14 @@ const gameplay = () => {
   const compBoard = gameBoardFactory();
 
   let gameOver = false;
+  let winner = null;
 
   const changeGameOver = () => {
     gameOver = !gameOver;
   };
 
+
+  //main game loop
   const AttackLoop = (event) => {
     const cell = event.target;
     let x = cell.dataset.x;
@@ -30,18 +34,34 @@ const gameplay = () => {
     comp.autoAttack(player1Board);
 
     dom.renderGameBoard(player1Board, player1Gameboard);
-    dom.renderGameBoard(compBoard, compGameboard);
+    dom.renderGameBoard(compBoard, compGameboard, true);
 
-    if (compBoard.allShipsSunk() || player1Board.allShipsSunk()) {
+    if (compBoard.allShipsSunk()) {
       removeBoardEventListeners();
-      console.log("gameover");
+      winner = player1
+      console.log(`game over, Player wins!`);
+    } else if (player1Board.allShipsSunk()){       
+        removeBoardEventListeners();
+        winner = comp
+        console.log(`game over, computer wins!`);
     }
   };
 
   const startGame = () => {
     compBoard.autoPlaceAllShips(comp.getShips());
     player1Board.autoPlaceAllShips(player1.getShips());
+    dom.renderGameBoard(player1Board, player1Gameboard);
+    dom.renderGameBoard(compBoard, compGameboard,true);
   };
+
+  const playAgain = () => {
+    player1.resetShips()
+    comp.resetShips()
+    player1Board.resetBoard()
+    compBoard.resetBoard()
+    startGame()
+    
+  }
 
   const addBoardEventListeners = () => {
     compGameboard.addEventListener("click", AttackLoop);
@@ -49,7 +69,7 @@ const gameplay = () => {
 
   const removeBoardEventListeners = () => {
     compGameboard.removeEventListener("click", AttackLoop);
-    console.log("eventlisteners removed");
+    
   };
 
   //getters
@@ -73,12 +93,14 @@ const gameplay = () => {
 
   //set event listeners
   addBoardEventListeners();
+  playAgainButton.addEventListener("click", playAgain)
 
   return {
     addBoardEventListeners,
     removeBoardEventListeners,
     changeGameOver,
     startGame,
+    playAgain,
     getPlayer1,
     getComp,
     getPlayer1Board,

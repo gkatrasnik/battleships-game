@@ -11,6 +11,12 @@ const gameBoardFactory = () => {
     return grid;
   };
 
+  const resetBoard = () => {
+    grid = Array(10)
+    .fill(null)
+    .map(() => Array(10).fill(null));
+  }
+
   const autoPlaceShip = (ship) => {
     const x = randomNumber(0, 9);
     const y = randomNumber(0, 9);
@@ -143,6 +149,7 @@ const gameBoardFactory = () => {
 
   return {
     getGrid,
+    resetBoard,
     placeShip,
     isPlaceEmpty,
     recieveAttack,
