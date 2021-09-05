@@ -69,6 +69,7 @@ const gameBoardFactory = () => {
 
   //check if all slots are empty -> return true, if there is ship return false
   const isPlaceEmpty = (x, y, ship, direction) => {
+    let coordinates = [];
     if (direction === "horizontal") {
       // if ship doesnt fit the board, place it to the edge
       if (x > 10 - ship.length) {
@@ -79,10 +80,10 @@ const gameBoardFactory = () => {
         y = 9;
       }
       for (let i = 0; i < ship.length; i++) {
-        console.log(`${ship.name}, ${i}`);
-        if (grid[x + i][y] !== null) {
-          return false;
-        }
+        coordinates.push(grid[x + i][y]);
+      }
+      if (coordinates.every((x) => x === null)) {
+        return true;
       }
     } else if (direction === "vertical") {
       // if ship doesnt fit the board, place it to the edge
@@ -94,13 +95,14 @@ const gameBoardFactory = () => {
         x = 9;
       }
       for (let i = 0; i < ship.length; i++) {
-        if (grid[x][y + i] !== null) {
-          return false;
-        }
+        coordinates.push(grid[x][y + i]);
+      }
+      if (coordinates.every((x) => x === null)) {
+        return true;
       }
     }
     console.log(`cant place ${ship.name} to ˘${x}, ${y}, ${direction}`);
-    return true;
+    return false;
   };
 
   //if there is ship, send hit(index) and mark spot hit, else just mark it miss
