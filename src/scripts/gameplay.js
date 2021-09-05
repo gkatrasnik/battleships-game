@@ -42,7 +42,7 @@ const gameplay = () => {
     comp.autoAttack(player1Board);
 
     dom.renderGameBoard(player1Board, player1Gameboard);
-    dom.renderGameBoard(compBoard, compGameboard, true); //neds to be true
+    dom.renderGameBoard(compBoard, compGameboard); //neds to be true
 
     if (compBoard.allShipsSunk()) {
       removeBoardEventListeners();
@@ -65,7 +65,7 @@ const gameplay = () => {
     compBoard.autoPlaceAllShips(comp.getShips());
     player1Board.autoPlaceAllShips(player1.getShips());
     dom.renderGameBoard(player1Board, player1Gameboard);
-    dom.renderGameBoard(compBoard, compGameboard, true); //neds to be true to be hidden
+    dom.renderGameBoard(compBoard, compGameboard); //neds to be true to be hidden
     renderScore();
   };
 
