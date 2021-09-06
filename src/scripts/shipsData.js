@@ -5,10 +5,6 @@ const shipsData = [
   { name: "two1", length: 2 },
   { name: "two2", length: 2 },
   { name: "two3", length: 2 },
-  { name: "one1", length: 1 },
-  { name: "one2", length: 1 },
-  { name: "one3", length: 1 },
-  { name: "one4", length: 1 },
 ];
 
 export { shipsData };

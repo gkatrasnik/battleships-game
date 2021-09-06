@@ -28,6 +28,38 @@
   text-align: center;
 }
 
+#start-game-div {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border: 2px solid black;
+  position: absolute;
+  top: 50vh;
+  margin-left: auto;
+  margin-right: auto;
+  width: 350px;
+  height: 200px;
+  text-align: center;
+}
+
+#rotate-ship-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border: 2px solid black;
+  position: absolute;
+  top: 0vh;
+  margin-left: auto;
+  margin-right: auto;
+  width: 150px;
+  height: 100px;
+  text-align: center;
+}
+
 #gameboards-container {
   display: flex;
   justify-content: center;
@@ -44,14 +76,14 @@
 }
 
 #player1-gameboard {
-  width: 400px;
-  height: 400px;
+  width: 420px;
+  height: 420px;
   border: 3px solid blue;
 }
 
 #comp-gameboard {
-  width: 400px;
-  height: 400px;
+  width: 420px;
+  height: 420px;
   border: 3px solid red;
 }
 
@@ -73,13 +105,12 @@
 }
 
 .grid-cell {
-  width: 9%;
-  height: 9%;
+  width: 40px;
+  height: 40px;
+  border: 1px solid white;
 
   display: inline-block;
   vertical-align: middle;
-
-  margin: 2px;
 }
 
 .ship {
@@ -100,4 +131,8 @@
 
 .miss {
   background-color: grey;
+}
+
+.preview {
+  background-color: lightgreen;
 }
