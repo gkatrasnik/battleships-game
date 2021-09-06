@@ -8,11 +8,11 @@
 }
 
 #title {
-  margin-bottom: 0;
+  margin-bottom: 2vh;
   margin-top: 0;
 }
 
-#winner-div {
+.popup {
   display: none;
   flex-direction: column;
   align-items: center;
@@ -20,25 +20,8 @@
   background-color: white;
   border: 2px solid black;
   position: absolute;
-  top: 50vh;
+  top: 20vh;
   margin-left: auto;
-  margin-right: auto;
-  width: 350px;
-  height: 200px;
-  text-align: center;
-}
-
-#start-game-div {
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: white;
-  border: 2px solid black;
-  position: absolute;
-  top: 50vh;
-  margin-left: auto;
-  margin-right: auto;
   width: 350px;
   height: 200px;
   text-align: center;
@@ -52,11 +35,10 @@
   background-color: white;
   border: 2px solid black;
   position: absolute;
-  top: 0vh;
+  top: 50px;
   margin-left: auto;
-  margin-right: auto;
   width: 150px;
-  height: 100px;
+  height: 90px;
   text-align: center;
 }
 
@@ -76,15 +58,22 @@
 }
 
 #player1-gameboard {
-  width: 420px;
-  height: 420px;
+  cursor: pointer;
+  width: 440px;
+  height: 440px;
   border: 3px solid blue;
 }
 
 #comp-gameboard {
-  width: 420px;
-  height: 420px;
+  cursor: crosshair;
+  width: 440px;
+  height: 440px;
   border: 3px solid red;
+}
+#titles {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .player-name {
@@ -93,6 +82,7 @@
 }
 
 .control-button {
+  cursor: pointer;
   background-color: white;
   color: black;
   border: 2px solid #555555;
@@ -107,7 +97,7 @@
 .grid-cell {
   width: 40px;
   height: 40px;
-  border: 1px solid white;
+  border: 2px solid white;
 
   display: inline-block;
   vertical-align: middle;
@@ -127,6 +117,7 @@
 
 .sunk {
   background-color: red;
+  border: 2px solid darkred;
 }
 
 .miss {
@@ -134,5 +125,5 @@
 }
 
 .preview {
-  background-color: lightgreen;
+  background-color: lightsteelblue;
 }

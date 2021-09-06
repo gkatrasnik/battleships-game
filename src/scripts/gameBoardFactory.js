@@ -5,12 +5,6 @@ const gameBoardFactory = () => {
     .fill(null)
     .map(() => Array(10).fill(null));
 
-  let placedShips = [];
-
-  const getPlacedShips = () => {
-    return placedShips;
-  };
-
   const getGrid = () => {
     return grid;
   };
@@ -37,7 +31,7 @@ const gameBoardFactory = () => {
     }
   };
 
-  //console view is rotated 90 clockwise
+  //dom view is rotated 90 degres
   //direction is horizontal by default, add "vertical" arg to rotate
   const placeShip = (x, y, ship, direction) => {
     //rotate ship to vertical if "verical" in args
@@ -67,7 +61,7 @@ const gameBoardFactory = () => {
           grid[x][y + i] = { ship, i, status: null };
         }
       }
-      placedShips.push(ship);
+
       return true;
     } else {
       return false;
@@ -110,7 +104,7 @@ const gameBoardFactory = () => {
         return true;
       }
     }
-    //console.log(`cant place ${ship.name} to ˘${x}, ${y}, ${direction}`);
+    //.
     return false;
   };
 

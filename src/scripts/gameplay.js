@@ -24,7 +24,6 @@ const gameplay = () => {
   const compBoard = gameBoardFactory();
   const setupGame = gameSetup(player1, player1Board, player1Gameboard);
 
-  let gameOver = false;
   let winner = null;
   let scorePlayer = 0;
   let scoreComp = 0;
@@ -33,11 +32,7 @@ const gameplay = () => {
     scoreBoard.textContent = `${scorePlayer} : ${scoreComp}`;
   };
 
-  const changeGameOver = () => {
-    gameOver = !gameOver;
-  };
-
-  //main game loop
+  //main game loop --attack enemy, enemy attack back. check if all ships are sunk
   const AttackLoop = (event) => {
     const cell = event.target;
     let x = cell.dataset.x;
@@ -47,7 +42,7 @@ const gameplay = () => {
     comp.autoAttack(player1Board);
 
     dom.renderGameBoard(player1Board, player1Gameboard);
-    dom.renderGameBoard(compBoard, compGameboard); //neds to be true
+    dom.renderGameBoard(compBoard, compGameboard, true); //neds to be true
 
     if (compBoard.allShipsSunk()) {
       removeBoardEventListeners();
@@ -68,11 +63,10 @@ const gameplay = () => {
 
   const setup = () => {
     removeBoardEventListeners();
-    setupGame.addGameSetupEventListeners(player1Gameboard, player1Board);
+    setupGame.addGameSetupEventListeners(player1Gameboard);
     setupGame.setPlayerShips(player1.getShips());
-
     dom.renderGameBoard(player1Board, player1Gameboard);
-    dom.renderGameBoard(compBoard, compGameboard); //needs to be true to be hidden
+    dom.renderGameBoard(compBoard, compGameboard, true); //needs to be true to be hidden
   };
 
   const startGame = () => {
@@ -81,7 +75,7 @@ const gameplay = () => {
     setupGame.removeSetupEventListeners(player1Gameboard);
     compBoard.autoPlaceAllShips(comp.getShips());
     dom.renderGameBoard(player1Board, player1Gameboard);
-    dom.renderGameBoard(compBoard, compGameboard); //needs to be true to be hidden
+    dom.renderGameBoard(compBoard, compGameboard, true); //needs to be true to be hidden
     renderScore();
   };
 
@@ -103,25 +97,6 @@ const gameplay = () => {
     compGameboard.removeEventListener("click", AttackLoop);
   };
 
-  //getters
-  const getDomElements = () => {
-    return { gameboardsContainer, player1Gameboard, compGameboard, scoreBoard };
-  };
-
-  const getPlayer1 = () => {
-    return player1;
-  };
-
-  const getComp = () => {
-    return comp;
-  };
-  const getPlayer1Board = () => {
-    return player1Board;
-  };
-  const getCompBoard = () => {
-    return compBoard;
-  };
-
   //set event listeners
   addBoardEventListeners();
   startGameButton.addEventListener("click", startGame);
@@ -130,15 +105,9 @@ const gameplay = () => {
   return {
     addBoardEventListeners,
     removeBoardEventListeners,
-    changeGameOver,
     setup,
     startGame,
     playAgain,
-    getPlayer1,
-    getComp,
-    getPlayer1Board,
-    getCompBoard,
-    getDomElements,
   };
 };
 

@@ -1,5 +1,4 @@
 import dom from "./dom";
-import gameplay from "./gameplay";
 
 const gameSetup = (player, gameboard, parentElement) => {
   const startGameDiv = document.getElementById("start-game-div");
@@ -21,16 +20,11 @@ const gameSetup = (player, gameboard, parentElement) => {
     currentShip = ship;
   };
 
-  const getCurentShip = () => {
-    return currentShip;
-  };
-
   const setGrid = (gameboard) => {
     //dont really need that
     grid = gameboard.getGrid();
   };
 
-  //doesnt work
   const previewShip = (event) => {
     const direction = currentShip.getDirection();
     let cells = [];
@@ -76,11 +70,13 @@ const gameSetup = (player, gameboard, parentElement) => {
       let spot = document.querySelector(`[data-x="${xa}"][data-y="${ya}"]`);
       cells.push(spot);
     }
-    cells.forEach((cell) => cell.classList.remove("preview"));
+    cells.forEach((cell) => {
+      cell.classList.toggle("preview");
+    });
   };
 
+  //place ship on click
   const placeShip = (event) => {
-    console.log(currentShip);
     const cell = event.target;
     let x = parseInt(cell.dataset.x);
     let y = parseInt(cell.dataset.y);
@@ -91,6 +87,7 @@ const gameSetup = (player, gameboard, parentElement) => {
       currentShip.getDirection()
     );
     dom.renderGameBoard(gameboard, parentElement);
+
     if (placeShip) {
       placedShips.push(currentShip);
       currentShipIndex++;
@@ -111,18 +108,19 @@ const gameSetup = (player, gameboard, parentElement) => {
     placedShips = [];
   };
 
-  const addGameSetupEventListeners = (grid, gameboard) => {
-    grid.addEventListener("mouseover", previewShip);
-    grid.addEventListener("mouseout", removePreviewShip);
-    grid.addEventListener("click", (e) => {
-      placeShip(e, gameboard);
+  const addGameSetupEventListeners = (gridElement) => {
+    gridElement.addEventListener("mouseover", previewShip);
+    gridElement.addEventListener("mouseout", removePreviewShip);
+    gridElement.addEventListener("click", (e) => {
+      placeShip(e);
+      removePreviewShip(e);
     });
   };
 
-  const removeSetupEventListeners = (grid) => {
-    grid.removeEventListener("mouseover", previewShip);
-    grid.removeEventListener("mouseout", removePreviewShip);
-    grid.removeEventListener("click", placeShip);
+  const removeSetupEventListeners = (gridElement) => {
+    gridElement.removeEventListener("mouseover", previewShip);
+    gridElement.removeEventListener("mouseout", removePreviewShip);
+    gridElement.removeEventListener("click", placeShip);
   };
 
   rotateShipButton.addEventListener("click", () => {
@@ -133,7 +131,6 @@ const gameSetup = (player, gameboard, parentElement) => {
     setGrid,
     setPlayerShips,
     setCurrentShip,
-    getCurentShip,
     addGameSetupEventListeners,
     removeSetupEventListeners,
     previewShip,

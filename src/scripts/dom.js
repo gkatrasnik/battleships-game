@@ -12,15 +12,12 @@ const dom = (() => {
         cell.classList.add("default");
       } else {
         cell.classList.add("ship");
-        cell.textContent = value.ship.name; //----------------debuging
       }
       if (value.status === "hit") {
         cell.classList.add("hit");
-        cell.textContent = value.ship.name; //----------------debuging
       }
       if (value.ship.isSunk()) {
         cell.classList.add("sunk");
-        cell.textContent = value.ship.name; //----------------debuging
       }
     }
 

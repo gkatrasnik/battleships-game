@@ -6,24 +6,31 @@
   </head>
   <body>
     <div id="root">
-      <div id="winner-div">
-        <h3 id="winner"></h3>
+      <div id="winner-div" class="popup">
+        <h2 id="winner"></h2>
         <button id="play-again-button-div" class="control-button">
           Play again
         </button>
       </div>
-      <div id="start-game-div">
+      <div id="start-game-div" class="popup">
         <h3>All ships are placed, you can start the game now</h3>
         <button id="start-game-button" class="control-button">Start</button>
       </div>
+
+      <div id="controls">
+        <div id="titles">
+          <h1 id="title">Battleships</h1>
+
+          <h3 id="scoreboard">Score - Score</h3>
+        </div>
+      </div>
       <div id="rotate-ship-div">
         <h3>Place your ships</h3>
-        <button id="rotate-ship-button" class="control-button">Rotate</button>
+        <button id="rotate-ship-button" class="control-button">
+          Rotate ship
+        </button>
       </div>
 
-      <h1 id="title">Battleships</h1>
-      <h3 id="scoreboard">Score - Score</h3>
-      <div id="controls"></div>
       <div id="gameboards-container">
         <div class="gameboard-container">
           <h3 class="player-name">Player</h3>
