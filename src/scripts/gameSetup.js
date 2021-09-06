@@ -1,12 +1,12 @@
 import dom from "./dom";
 import gameplay from "./gameplay";
 
-const gameSetup = (player, board, parentElement) => {
+const gameSetup = (player, gameboard, parentElement) => {
   const startGameDiv = document.getElementById("start-game-div");
   const rotateShipDiv = document.getElementById("rotate-ship-div");
   const rotateShipButton = document.getElementById("rotate-ship-button");
 
-  let grid = board; //dont really need that
+  const grid = gameboard.getGrid();
   let ships = player.getShips();
   let placedShips = [];
   let currentShip = ships[0];
@@ -32,19 +32,51 @@ const gameSetup = (player, board, parentElement) => {
 
   //doesnt work
   const previewShip = (event) => {
+    const direction = currentShip.getDirection();
+    let cells = [];
     const cell = event.target;
-    let x = cell.dataset.x;
-    let y = cell.dataset.y;
-    cell.classList.add("preview");
+    let x = parseInt(cell.dataset.x);
+    let y = parseInt(cell.dataset.y);
+    for (let i = 0; i < currentShip.length; i++) {
+      let xa = null;
+      let ya = null;
+      if (direction === "horizontal") {
+        xa = x + i;
+        ya = y;
+      } else if (direction === "vertical") {
+        xa = x;
+        ya = y + i;
+      }
+      let spot = document.querySelector(`[data-x="${xa}"][data-y="${ya}"]`);
 
-    // cell.classList.add("preview");
+      cells.push(spot);
+    }
+
+    cells.forEach((cell) => cell.classList.add("preview"));
   };
 
   const removePreviewShip = (event) => {
+    const direction = currentShip.getDirection();
+    let cells = [];
     const cell = event.target;
-    let x = cell.dataset.x;
-    let y = cell.dataset.y;
-    cell.classList.remove("preview");
+    let x = parseInt(cell.dataset.x);
+    let y = parseInt(cell.dataset.y);
+
+    for (let i = 0; i < currentShip.length; i++) {
+      let xa = null;
+      let ya = null;
+      if (direction === "horizontal") {
+        xa = x + i;
+        ya = y;
+      } else if (direction === "vertical") {
+        xa = x;
+        ya = y + i;
+      }
+
+      let spot = document.querySelector(`[data-x="${xa}"][data-y="${ya}"]`);
+      cells.push(spot);
+    }
+    cells.forEach((cell) => cell.classList.remove("preview"));
   };
 
   const placeShip = (event) => {
@@ -52,13 +84,13 @@ const gameSetup = (player, board, parentElement) => {
     const cell = event.target;
     let x = parseInt(cell.dataset.x);
     let y = parseInt(cell.dataset.y);
-    let placeShip = board.placeShip(
+    let placeShip = gameboard.placeShip(
       x,
       y,
       currentShip,
       currentShip.getDirection()
     );
-    dom.renderGameBoard(board, parentElement);
+    dom.renderGameBoard(gameboard, parentElement);
     if (placeShip) {
       placedShips.push(currentShip);
       currentShipIndex++;
@@ -79,11 +111,11 @@ const gameSetup = (player, board, parentElement) => {
     placedShips = [];
   };
 
-  const addGameSetupEventListeners = (grid, board) => {
+  const addGameSetupEventListeners = (grid, gameboard) => {
     grid.addEventListener("mouseover", previewShip);
     grid.addEventListener("mouseout", removePreviewShip);
     grid.addEventListener("click", (e) => {
-      placeShip(e, board);
+      placeShip(e, gameboard);
     });
   };
 
