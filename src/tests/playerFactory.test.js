@@ -26,10 +26,12 @@ describe("both players can attack enemy board and have same ships", () => {
     player1.attack(2, 0, compBoard);
     player1.attack(3, 0, compBoard);
     player1.attack(9, 9, compBoard);
-    expect(typeof compBoard.getGrid()[0][0]).toBe("object");
-    expect(typeof compBoard.getGrid()[0][1]).toBe("object");
-    expect(typeof compBoard.getGrid()[0][2]).toBe("object");
-    expect(typeof compBoard.getGrid()[0][3]).toBe("object");
+    expect(compBoard.getGrid()[0][0]).not.toBe(null);
+    expect(compBoard.getGrid()[1][0]).not.toBe(null);
+    expect(compBoard.getGrid()[2][0]).not.toBe(null);
+    expect(compBoard.getGrid()[3][0]).not.toBe(null);
+    expect(compBoard.getGrid()[3][0]).not.toBe("miss");
+
     expect(compBoard.getGrid()[0][4]).toBe(null);
     expect(compBoard.getGrid()[9][9]).toBe("miss");
   });
