@@ -61,15 +61,15 @@ const gameplay = () => {
 
     if (compBoard.allShipsSunk()) {
       removeBoardEventListeners();
-      winner = player1;
-      winnerText.textContent = "Player wins!";
+      winner = "Player";
+      winnerText.textContent = `${winner} wins!`;
       winnerDiv.style.display = "flex";
       scorePlayer++;
       renderScore();
     } else if (player1Board.allShipsSunk()) {
       removeBoardEventListeners();
-      winner = comp;
-      winnerText.textContent = "Player wins!";
+      winner = "Computer";
+      winnerText.textContent = `${winner} wins!`;
       winnerDiv.style.display = "flex";
       compScore++;
       renderScore();
@@ -989,7 +989,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap);"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "#root {\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n  font-family: \"Roboto\", sans-serif;\r\n}\r\n\r\n#title {\r\n  margin-bottom: 2vh;\r\n  margin-top: 0;\r\n}\r\n\r\n.popup {\r\n  display: none;\r\n  flex-direction: column;\r\n  align-items: center;\r\n  justify-content: center;\r\n  background-color: white;\r\n  border: 2px solid black;\r\n  position: absolute;\r\n  top: 20vh;\r\n  margin-left: auto;\r\n  width: 350px;\r\n  height: 200px;\r\n  text-align: center;\r\n}\r\n\r\n#rotate-ship-div {\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n  justify-content: center;\r\n  background-color: white;\r\n  border: 2px solid black;\r\n  position: absolute;\r\n  top: 50px;\r\n  margin-left: auto;\r\n  width: 150px;\r\n  height: 90px;\r\n  text-align: center;\r\n}\r\n\r\n#gameboards-container {\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  flex-wrap: wrap;\r\n}\r\n\r\n.gameboard-container {\r\n  display: flex;\r\n  flex-direction: column;\r\n  margin: 1em;\r\n  align-items: center;\r\n  margin-top: 0;\r\n}\r\n\r\n#player1-gameboard {\r\n  cursor: pointer;\r\n  width: 440px;\r\n  height: 440px;\r\n  border: 3px solid blue;\r\n}\r\n\r\n#comp-gameboard {\r\n  cursor: crosshair;\r\n  width: 440px;\r\n  height: 440px;\r\n  border: 3px solid red;\r\n}\r\n#titles {\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n}\r\n\r\n.player-name {\r\n  margin-top: 0;\r\n  margin-bottom: 0.5em;\r\n}\r\n\r\n.control-button {\r\n  cursor: pointer;\r\n  background-color: white;\r\n  color: black;\r\n  border: 2px solid #555555;\r\n  font-size: 1.1em;\r\n}\r\n\r\n.control-button:hover {\r\n  background-color: #555555;\r\n  color: white;\r\n}\r\n\r\n.grid-cell {\r\n  width: 40px;\r\n  height: 40px;\r\n  border: 2px solid white;\r\n\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n}\r\n\r\n.ship {\r\n  background-color: steelblue;\r\n}\r\n\r\n.default {\r\n  background-color: lightgrey;\r\n}\r\n\r\n.hit {\r\n  background-color: lightcoral;\r\n}\r\n\r\n.sunk {\r\n  background-color: red;\r\n  border: 2px solid darkred;\r\n}\r\n\r\n.miss {\r\n  background-color: grey;\r\n}\r\n\r\n.preview {\r\n  background-color: lightsteelblue;\r\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "#root {\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n  font-family: \"Roboto\", sans-serif;\r\n}\r\n\r\n#title {\r\n  margin-bottom: 2vh;\r\n  margin-top: 0;\r\n}\r\n\r\n.popup {\r\n  display: none;\r\n  flex-direction: column;\r\n  align-items: center;\r\n  justify-content: center;\r\n  background-color: white;\r\n  border: 2px solid black;\r\n  position: absolute;\r\n  top: 20vh;\r\n  margin-left: auto;\r\n  width: 350px;\r\n  height: 200px;\r\n  text-align: center;\r\n}\r\n\r\n#rotate-ship-div {\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n  justify-content: center;\r\n  background-color: white;\r\n  border: 2px solid black;\r\n  position: absolute;\r\n  top: 50px;\r\n  margin-left: auto;\r\n  width: 150px;\r\n  height: 90px;\r\n  text-align: center;\r\n}\r\n\r\n#gameboards-container {\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  flex-wrap: wrap;\r\n}\r\n\r\n.gameboard-container {\r\n  display: flex;\r\n  flex-direction: column;\r\n  margin: 1em;\r\n  align-items: center;\r\n  margin-top: 0;\r\n}\r\n\r\n#player1-gameboard {\r\n  cursor: pointer;\r\n  width: 440px;\r\n  height: 440px;\r\n  border: 3px solid blue;\r\n}\r\n\r\n#comp-gameboard {\r\n  cursor: crosshair;\r\n  width: 440px;\r\n  height: 440px;\r\n  border: 3px solid red;\r\n}\r\n#titles {\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n}\r\n\r\n.player-name {\r\n  margin-top: 0;\r\n  margin-bottom: 0.5em;\r\n}\r\n\r\n.control-button {\r\n  cursor: pointer;\r\n  background-color: white;\r\n  color: black;\r\n  border: 2px solid #555555;\r\n  font-size: 1.1em;\r\n}\r\n\r\n.control-button:hover {\r\n  background-color: #555555;\r\n  color: white;\r\n}\r\n\r\n.grid-cell {\r\n  width: 40px;\r\n  height: 40px;\r\n  border: 2px solid white;\r\n\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n}\r\n\r\n.ship {\r\n  background-color: steelblue;\r\n}\r\n\r\n.default {\r\n  background-color: lightgrey;\r\n}\r\n\r\n.hit {\r\n  background-color: lightcoral;\r\n}\r\n\r\n.sunk {\r\n  background-color: red;\r\n  border: 2px solid darkred;\r\n}\r\n\r\n.miss {\r\n  background-color: darkgrey;\r\n}\r\n\r\n.preview {\r\n  background-color: lightsteelblue;\r\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

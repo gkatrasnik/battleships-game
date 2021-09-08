@@ -46,15 +46,15 @@ const gameplay = () => {
 
     if (compBoard.allShipsSunk()) {
       removeBoardEventListeners();
-      winner = player1;
-      winnerText.textContent = "Player wins!";
+      winner = "Player";
+      winnerText.textContent = `${winner} wins!`;
       winnerDiv.style.display = "flex";
       scorePlayer++;
       renderScore();
     } else if (player1Board.allShipsSunk()) {
       removeBoardEventListeners();
-      winner = comp;
-      winnerText.textContent = "Player wins!";
+      winner = "Computer";
+      winnerText.textContent = `${winner} wins!`;
       winnerDiv.style.display = "flex";
       compScore++;
       renderScore();
