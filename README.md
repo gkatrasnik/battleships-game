@@ -1,6 +1,6 @@
 # Battleships Game
 Odin project battleships game\
-https://gkatrasnik.github.io/battleships-game/
+https://gkatrasnik.github.io/battleships-game
 
 
 Built with:
